@@ -1,102 +1,198 @@
-import Image from "next/image";
+'use client';
+import { useRef } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { TextGenerateEffect } from "./components/text-generate-effect";
+import useLenis from './lib/useLenis';
+import TextType from './components/TextType';
 
-export default function Home() {
+const CURSOR_STYLE = { cursor: "url('/icon_resized .png'), auto" };
+const WORDS = `Born to pwn, forced to sleep (sometimes), but only after we've replaced your favicon with our ASCII logo !`;
+
+export default function Page() {
+  useLenis({ lerp: 0.07 });
+  const containerRef = useRef(null);
+
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div
+      className="overflow-x-hidden"
+      style={{
+        backgroundImage: "url('/oday_bg .webp')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        minHeight: '100vh',
+        ...CURSOR_STYLE,
+      }}
+    >
+      {/* Navbar */}
+      <nav className="fixed top-0 left-0 w-full z-50 flex items-center justify-center px-4 md:block">
+        <div className="flex flex-col items-center md:flex-row md:items-start md:justify-start">
+          {/* Logo */}
+          <div className="flex items-center justify-center md:justify-start mt-4">
+            {/* Adamas icon (desktop only) */}
+            <div className="hidden md:flex items-center mr-2">
+              <Link href="https://www.aucse.in/">
+                <Image
+                  src="/adamas.png"
+                  alt="Adamas"
+                  width={64} 
+                  height={64}
+                  className="w-16 h-16"
+                  style={CURSOR_STYLE}
+                />
+              </Link>
+            </div>
+            <Link href="/" className="order-2 md:order-none mx-auto md:mx-0">
+              <Image
+                src="/main.png"
+                alt="Main"
+                width={260} 
+                height={100}
+                className="w-40 h-auto md:static md:ml-2"
+                style={CURSOR_STYLE}
+              />
+            </Link>
+            <div className="club tracking-widest hidden md:flex items-center justify-center mr-2 md:mt-12 md:ml-4">
+              <TextType
+                text={["~Cy-Coders", "Dept. of CSE", "Happy coding !"]}
+                typingSpeed={75}
+                pauseDuration={1500}
+                showCursor={true}
+                cursorCharacter="|"
+              />
+            </div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            {/* Adamas icon (mobile only) */}
+            <div className="ml-2 md:hidden flex items-center">
+              <Link href="https://www.aucse.in/">
+                <Image
+                  src="/adamas.png"
+                  alt="Adamas"
+                  width={48}
+                  height={48}
+                  className="w-10 h-10"
+                  style={CURSOR_STYLE}
+                />
+              </Link>
+            </div>
+          </div>
+
+          {/* Tagline animation (mobile only) */}
+          <div className="tracking-widest md:hidden text-bold flex text-sm mt-1 text-c ml-50" style={{ fontFamily: "monospace" }}>
+            <TextType
+              text={["~Cy-Coders", "Dept. of CSE", "Happy coding !"]}
+              typingSpeed={75}
+              pauseDuration={1500}
+              showCursor={true}
+              cursorCharacter="|"
+            />
+          </div>
+        </div>
+        {/* Member button (desktop only) */}
+        <Link
+          href="/Registration_Page"
+          onClick={() => {
+            const audio = new Audio('/sound.mp3');
+            audio.play();
+          }}
+          className="hidden md:block absolute top-5 right-8 w-60 h-auto transition-transform duration-300 hover:scale-110"
+          style={CURSOR_STYLE}
+        >
+          <Image
+            src="/member_bt.png"
+            alt="Member"
+            width={240}
+            height={100}
+            className="w-60 h-auto transition-transform duration-300 hover:scale-110"
+            style={CURSOR_STYLE}
+          />
+        </Link>
+      </nav>
+
+      {/* Founders */}
+      <div className="founders flex flex-col md:flex-row justify-center items-center min-h-screen space-y-8 md:space-y-0 md:space-x-8">
+        {/* Ard */}
+        <div className="flex flex-col items-center">
+          <Link href="https://arddev.vercel.app/"
+          onClick={() => {
+            const audio = new Audio('/sound.mp3');
+            audio.play();
+          }}
           >
             <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+              src="/ard.png"
+              alt="Ard"
+              width={300}
+              height={300}
+              className="transition-transform duration-300 hover:scale-105 
+                        w-[150px] h-auto md:w-[300px] md:h-auto"
+              style={CURSOR_STYLE}
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          </Link>
+          <Image
+            src="/name-ard.png"
+            alt="Name Ard"
+            width={200}
+            height={80}
+            className="mt-4 w-[120px] h-auto md:w-[200px] md:h-auto"
+          />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+
+        {/* Zero */}
+        <div className="flex flex-col items-center">
+          <Link href="https://github.com/0dev1337"
+          onClick={() => {
+            const audio = new Audio('/sound.mp3');
+            audio.play();
+          }}>
+            <Image
+              src="/zero.png"
+              alt="Zero"
+              width={300}
+              height={300}
+              className="transition-transform duration-300 hover:scale-105 
+                        w-[150px] h-auto md:w-[300px] md:h-auto"
+              style={CURSOR_STYLE}
+            />
+          </Link>
+          <Image
+            src="/name-zero.png"
+            alt="Name Zero"
+            width={200}
+            height={80}
+            className="mt-4 w-[120px] h-auto md:w-[200px] md:h-auto"
+          />
+        </div>
+      </div>
+      <div className="ran-para flex justify-center items-center mt-2 pl-4 sm:pl-8 md:pl-32 text-xs sm:text-sm md:text-base w-full">
+        <div style={{ maxWidth: 600, width: '100%' }}>
+          <TextGenerateEffect words={WORDS} />
+        </div>
+      </div>
+      {/* Member button (mobile only) */}
+      <div className="flex md:hidden mt-8 mb-4 justify-center">
+        <Link
+          href="/Registration_Page"
+          onClick={() => {
+            const audio = new Audio('/sound.mp3');
+            audio.play();
+          }}
+          style={CURSOR_STYLE}
         >
           <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+            src="/member_bt.png"
+            alt="Member"
+            width={240}
+            height={100}
+            className="w-60 h-auto transition-transform duration-300 hover:scale-110"
+            style={CURSOR_STYLE}
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+        </Link>
+      </div>
+
+      {/* Footer */}
+      <footer className="w-full text-center py-4 mt-8 text-sm text-gray-400" style={{ fontFamily: 'monospace' }}>
+        Developed w <span className="text-red-500">❤️</span> by Team 0DAY
       </footer>
     </div>
   );
